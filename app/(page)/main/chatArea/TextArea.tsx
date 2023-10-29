@@ -28,7 +28,7 @@ const TextArea = () => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer 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` // replace with your key
+                "Authorization": `Bearer ${process.env.CHATGPT_API_KEY}` // replace with your key
             },
             body: JSON.stringify({
                 messages: [{ "role": "user", "content": chat }],
