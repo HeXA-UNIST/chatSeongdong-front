@@ -32,7 +32,7 @@ const ChatContentArea = () => {
     //     chatStore.addChat("안녕하세요 성동구 누리집입니다. 무엇을 도와드릴까요?", "bot");
     // }, [chatContent]);
     return (
-        <div className='px-16 py-8 h-[90vh] w-full flex-grow overflow-y-auto'>
+        <div className='px-16 py-8 h-[90vh] w-[65vw] flex-grow overflow-y-auto'>
             <div className="flex flex-col gap-3">
                 {chatContent.map((content, index) => {
                     return (

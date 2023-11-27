@@ -36,12 +36,12 @@ const TextArea = () => {
         });
         const data = await response.json();
         console.log(data);
-        chatStore.addChat(data.response, "bot");
+        chatStore.addChat(data.response, "ChatSeongDong");
         
     }
     return (
         <div className="flex flex-row bg-slate-100 rounded-lg items-center shadow-sm ring-1 ring-black ring-opacity-25">
-            <textarea className={cn("w-[500px] resize-none bg-transparent px-[10px] py-[12px] box-border",
+            <textarea className={cn("w-[50vw] resize-none bg-transparent px-[10px] py-[12px] box-border",
                 "scrollbar-thin scrollbar-rounded-full scrollbar-track-gray-100 scrollbar-thumb-gray-200",
                 "focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:ring-offset-transparent")}
                 ref={textAreaRef}
