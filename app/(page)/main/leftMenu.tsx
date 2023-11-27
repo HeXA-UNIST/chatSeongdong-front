@@ -10,11 +10,11 @@ const LeftMenu = () => {
                 <Icon icon="uil:setting" className='h-6 w-6 opacity-60'/>
             </RoundedDiv>
             <div className="flex flex-col w-[100%] gap-2">
-                <RoundedDiv>
+                <RoundedDiv onClick={()=> window.open("https://www.sd.go.kr/main/index.do", "_blank")}>
                     <Icon icon="gridicons:recent" className='h-6 w-6 opacity-60'/>
                     최근 이슈
                 </RoundedDiv>
-                <RoundedDiv>
+                <RoundedDiv onClick={()=> window.open("https://www.sd.go.kr/main/index.do", "_blank")}>
                     <Icon icon="material-symbols:captive-portal" className='h-6 w-6 opacity-60'/>
                     성동구 누리집
                 </RoundedDiv>

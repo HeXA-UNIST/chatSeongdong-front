@@ -15,7 +15,7 @@ const Question = ({ text }: { text?: string }) => {
             body: `user_input=${encodeURIComponent(text)}`
         });
         const data = await response.json();
-        chatStore.addChat(data.response, "bot");
+        chatStore.addChat(data.response, "ChatSeongDong");
     }
     return (
         <div className="flex flex-col gap-3">

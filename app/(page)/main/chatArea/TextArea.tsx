@@ -6,7 +6,7 @@ import chatStore from "./chatStore";
 const TextArea = () => {
     const [chat, setChat] = useState("");
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
-
+    
     const overFlowY = () => {
         if (!textAreaRef.current) return "hidden";
         return textAreaRef.current.scrollHeight > 200 ? "scroll" : "hidden";
@@ -24,6 +24,7 @@ const TextArea = () => {
         e.preventDefault();
         if (!chat) return;
         chatStore.addChat(chat, "user");
+        setChat("");
         let url = "http://127.0.0.1:8080/ask";
         const response = await fetch(url, {
             method: "POST",
@@ -36,7 +37,7 @@ const TextArea = () => {
         const data = await response.json();
         console.log(data);
         chatStore.addChat(data.response, "bot");
-        setChat("");
+        
     }
     return (
         <div className="flex flex-row bg-slate-100 rounded-lg items-center shadow-sm ring-1 ring-black ring-opacity-25">
