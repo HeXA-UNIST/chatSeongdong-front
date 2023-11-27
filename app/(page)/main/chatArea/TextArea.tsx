@@ -24,22 +24,18 @@ const TextArea = () => {
         e.preventDefault();
         if (!chat) return;
         chatStore.addChat(chat, "user");
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        let url = "http://127.0.0.1:8080/ask";
+        const response = await fetch(url, {
             method: "POST",
+            mode: "cors",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${process.env.CHATGPT_API_KEY}` // replace with your key
+                "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: JSON.stringify({
-                messages: [{ "role": "user", "content": chat }],
-                max_tokens: 64,
-                model: "gpt-3.5-turbo",
-                temperature: 0.7,
-                n: 1,
-            })
+            body: `user_input=${encodeURIComponent(chat)}`
         });
         const data = await response.json();
-        chatStore.addChat(data.choices[0].message.content, "bot");
+        console.log(data);
+        chatStore.addChat(data.response, "bot");
         setChat("");
     }
     return (

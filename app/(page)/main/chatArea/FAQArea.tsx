@@ -6,22 +6,16 @@ const Question = ({ text }: { text?: string }) => {
     const sendMessage = async() => {
         if (text === undefined) return;
         chatStore.addChat(text, "user");
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        const response = await fetch("http://127.0.0.1:8080/ask", {
+            mode: "cors",
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${process.env.CHATGPT_API_KEY}` // replace with your key
+                "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: JSON.stringify({
-                messages: [{ "role": "user", "content": text }],
-                max_tokens: 64,
-                model: "gpt-3.5-turbo",
-                temperature: 0.7,
-                n: 1,
-            })
+            body: `user_input=${encodeURIComponent(text)}`
         });
         const data = await response.json();
-        chatStore.addChat(data.choices[0].message.content, "bot");
+        chatStore.addChat(data.response, "bot");
     }
     return (
         <div className="flex flex-col gap-3">
