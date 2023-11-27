@@ -1,5 +1,31 @@
 
+import { useEffect, useState } from "react";
 import chatStore from "./chatStore";
+interface Typewriter {
+    text: string;
+    speed: number;
+}
+const Typewriter = ({ text, speed }: Typewriter) => {
+    const [displayedText, setDisplayedText] = useState('');
+
+    useEffect(() => {
+        let index = 0;
+
+        const intervalId = setInterval(() => {
+            if (index < text.length) {
+                setDisplayedText((prev) => prev + text[index]);
+                index++;
+            } else {
+                clearInterval(intervalId);
+            }
+        }, speed);
+
+        return () => clearInterval(intervalId);
+    }, [text, speed]);
+
+    return <div>{displayedText}</div>;
+};
+
 
 const ChatContentArea = () => {
     const chatContent = chatStore.chatContent;
@@ -13,7 +39,7 @@ const ChatContentArea = () => {
                                 {content.role}
                             </div>
                             <div className="font-bold text-xl text-black/30">
-                                {content.content}
+                                <Typewriter text={content.content} speed={50} />
                             </div>
                         </div>
                     </div>
